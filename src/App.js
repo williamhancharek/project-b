@@ -4,30 +4,46 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App() {
   const [input, setInput] = useState(0);
+  const [result, setResult] = useState(0);
+  const [clear, setClear] = useState("");
 
   function handleInput(event) {
     setInput(event.target.value);
-    console.log(event.target.value);
+    setClear(event.target.value);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    alert(input)
+    let number = Number(input);
+    let secondNumber = Number(result);
+    setResult(number + secondNumber);
   }
+
+  function resetInputField() {
+    setClear("");
+  }
+
   return (
     <div className="App">
       <div className="container">
+        <h1>Form Calculator</h1>
         <form onSubmit={handleSubmit} className="search-form" id="search-form">
           <div className="row">
             <div className="col-3">
               <div className="form-group form-group-warning">
-                <input type="text" className="form-control" id="number-input" />
+                <input
+                  type="number"
+                  className="form-control"
+                  id="result-input"
+                  value={result}
+                />
               </div>
             </div>
             <div className="col-3">
               <div className="form-group form-group-warning">
                 <input
-                  type="text"
+                  type="number"
+                  value={clear}
                   placeholder="Enter a number"
                   className="form-control"
                   id="number-input"
@@ -37,7 +53,12 @@ export default function App() {
             </div>
             <div className="col-3">
               <button className="btn btn-primary">Add</button>
-              <button className="btn btn-primary pl-3">Clear</button>
+              <button
+                onClick={resetInputField}
+                className="btn btn-primary pl-3"
+              >
+                Clear
+              </button>
             </div>
           </div>
         </form>
