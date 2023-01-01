@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 export default function App() {
   const [input, setInput] = useState(0);
   const [result, setResult] = useState(0);
-  const [clear, setClear] = useState("");
+  const [clear, setClear] = useState(false);
 
   function handleInput(event) {
     setInput(event.target.value);
@@ -20,7 +20,9 @@ export default function App() {
   }
 
   function resetInputField() {
-    setClear("");
+    setClear(true);
+    setResult(0);
+    setInput(0);
   }
 
   return (
@@ -36,6 +38,7 @@ export default function App() {
                   className="form-control"
                   id="result-input"
                   value={result}
+                  onChange={handleInput}
                 />
               </div>
             </div>
