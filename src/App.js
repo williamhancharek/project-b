@@ -34,7 +34,7 @@ export default function App() {
             <div className="col-3">
               <div className="form-group form-group-warning">
                 <input
-                  type="number"
+                  type="text"
                   className="form-control"
                   id="result-input"
                   value={result}
@@ -57,6 +57,7 @@ export default function App() {
             <div className="col-3">
               <button className="btn btn-primary">Add</button>
               <button
+              type="submit"
                 onClick={resetInputField}
                 className="btn btn-primary pl-3"
               >
