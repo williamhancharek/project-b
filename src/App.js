@@ -16,7 +16,11 @@ export default function App() {
     event.preventDefault();
     let number = Number(input);
     let secondNumber = Number(result);
-    setResult(number + secondNumber);
+    let summing = number + secondNumber;
+    let substriction = secondNumber - number;
+    let multiplication = number * secondNumber;
+    let division = secondNumber / number;
+    setResult([summing, substriction, multiplication, division]);
   }
 
   function resetInputField() {
@@ -57,7 +61,7 @@ export default function App() {
             <div className="col-3">
               <button className="btn btn-primary">Add</button>
               <button
-              type="submit"
+                type="submit"
                 onClick={resetInputField}
                 className="btn btn-primary pl-3"
               >
