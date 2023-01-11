@@ -12,15 +12,11 @@ export default function App() {
     setClear(event.target.value);
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function addInput(_event) {
     let number = Number(input);
     let secondNumber = Number(result);
     let summing = number + secondNumber;
-    let substriction = secondNumber - number;
-    let multiplication = number * secondNumber;
-    let division = secondNumber / number;
-    setResult([summing, substriction, multiplication, division]);
+    setResult(summing)
   }
 
   function resetInputField() {
@@ -33,7 +29,6 @@ export default function App() {
     <div className="App">
       <div className="container">
         <h1>Form Calculator</h1>
-        <form onSubmit={handleSubmit} className="search-form" id="search-form">
           <div className="row">
             <div className="col-3">
               <div className="form-group form-group-warning">
@@ -59,7 +54,12 @@ export default function App() {
               </div>
             </div>
             <div className="col-3">
-              <button className="btn btn-primary">Add</button>
+            <button
+              className="btn btn-primary"
+              onClick={addInput}
+            >
+              Add
+            </button>
               <button
                 type="submit"
                 onClick={resetInputField}
@@ -68,8 +68,7 @@ export default function App() {
                 Clear
               </button>
             </div>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );
