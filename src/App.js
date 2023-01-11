@@ -12,15 +12,13 @@ export default function App() {
     setClear(event.target.value);
   }
 
-  function handleSubmit(event) {
+  let number = Number(input);
+  let secondNumber = Number(result);
+
+  function handleSum(event) {
     event.preventDefault();
-    let number = Number(input);
-    let secondNumber = Number(result);
     let summing = number + secondNumber;
-    let substriction = secondNumber - number;
-    let multiplication = number * secondNumber;
-    let division = secondNumber / number;
-    setResult([summing, substriction, multiplication, division]);
+    setResult(summing);
   }
 
   function resetInputField() {
@@ -29,47 +27,89 @@ export default function App() {
     setInput(0);
   }
 
+  function handleSubstr() {
+    let substraction = secondNumber - number;
+    setResult(substraction);
+  }
+
+  function handleMult() {
+    let multiplication = number * secondNumber;
+    setResult(multiplication);
+  }
+
+  function handleDivision() {
+    let division = secondNumber / number;
+    setResult(division);
+  }
+
   return (
     <div className="App">
       <div className="container">
         <h1>Form Calculator</h1>
-        <form onSubmit={handleSubmit} className="search-form" id="search-form">
+        <div className="row">
+          <div className="col-3">
+            <div className="form-group form-group-warning">
+              <input
+                type="text"
+                className="form-control"
+                id="result-input"
+                value={result}
+                onChange={handleInput}
+              />
+            </div>
+          </div>
+          <div className="col-3">
+            <div className="form-group form-group-warning">
+              <input
+                type="number"
+                value={clear}
+                placeholder="Enter a number"
+                className="form-control"
+                id="number-input"
+                onChange={handleInput}
+              />
+            </div>
+          </div>
+          <div className="col-3">
+            <div className="btn-group">
+            <button onClick={handleSum} className="btn btn-primary">
+              Sum
+            </button>
+            <button
+              type="submit"
+              onClick={resetInputField}
+              className="btn btn-primary pl-3"
+            >
+              Clear
+            </button>
+          </div>
           <div className="row">
-            <div className="col-3">
-              <div className="form-group form-group-warning">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="result-input"
-                  value={result}
-                  onChange={handleInput}
-                />
-              </div>
-            </div>
-            <div className="col-3">
-              <div className="form-group form-group-warning">
-                <input
-                  type="number"
-                  value={clear}
-                  placeholder="Enter a number"
-                  className="form-control"
-                  id="number-input"
-                  onChange={handleInput}
-                />
-              </div>
-            </div>
-            <div className="col-3">
-              <button className="btn btn-primary">Add</button>
+            <div className="col mt-2">
               <button
                 type="submit"
-                onClick={resetInputField}
-                className="btn btn-primary pl-3"
+                onClick={handleSubstr}
+                className="btn btn-primary"
               >
-                Clear
+                Substr
               </button>
             </div>
           </div>
-        </form>
+          <div className="row">
+            <div className="col mt-2">
+              <button onClick={handleMult} className="btn btn-primary">
+                Mult
+              </button>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col mt-2">
+              <button onClick={handleDivision} className="btn btn-primary">
+                Div
+              </button>
+            </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

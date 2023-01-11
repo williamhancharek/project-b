@@ -14,3 +14,7 @@
 .App .btn {
   margin-right: 3px;
 }
+
+.App .btn-group button {
+  display: block;
+}
