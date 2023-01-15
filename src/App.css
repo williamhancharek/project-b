@@ -11,10 +11,12 @@
   padding: 0px;
 }
 
-.App .btn {
-  margin-right: 3px;
-}
-
 .App .btn-group button {
   display: block;
 }
+
+.App .clear {
+  margin-left: 12px;
+}
+
+
