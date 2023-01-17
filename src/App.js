@@ -1,12 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App() {
-  const [input, setInput] = useState(0);
+  const [input, setInput] = useState("");
   const [result, setResult] = useState(0);
   const [clear, setClear] = useState(false);
-  const inputRef = useRef(null);
+  const [rememberResult, setRememberResult] = useState(0);
+  const [showRememberedResult, setShowRememberedResult] = useState(0);
 
   function handleInput(event) {
     setInput(event.target.value);
@@ -23,7 +24,6 @@ export default function App() {
   function resetInputField() {
     setClear(true);
     setResult(0);
-    setInput(0);
   }
 
   function handleSubtr() {
@@ -48,14 +48,20 @@ export default function App() {
   }
 
   function handleMemorization() {
-    setResult(inputRef.current.value);
-    console.log(inputRef.current.value);
+    setRememberResult(result);
+    console.log(result)
+  }
+
+  function displayMemorised() {
+   setShowRememberedResult(rememberResult);
+   console.log(rememberResult)
   }
 
   return (
     <div className="App">
       <div className="container">
         <h1>Form Calculator</h1>
+        <p>{showRememberedResult}</p>
         <div className="row">
           <div className="col-3">
             <div className="form-group form-group-warning">
@@ -64,7 +70,6 @@ export default function App() {
                 className="form-control"
                 id="result-input"
                 value={result}
-                ref={inputRef}
                 onChange={handleInput}
               />
             </div>
@@ -114,9 +119,18 @@ export default function App() {
               </div>
             </div>
             <div className="row">
-              <div className="col mt-2">
+              <div className="col-2 mt-2">
                 <button onClick={handleMult} className="btn btn-primary">
                   *
+                </button>
+              </div>
+              <div className="col-10 mt-2">
+                <button
+                  type="submit"
+                  onClick={displayMemorised}
+                  className="btn btn-primary"
+                >
+                  DM
                 </button>
               </div>
             </div>
