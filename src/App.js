@@ -1,16 +1,18 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App() {
   const [input, setInput] = useState(0);
   const [result, setResult] = useState(0);
-  const [clear, setClear] = useState(false);
-  const inputRef = useRef(null);
+  const [savedResult, setSavedResult] = useState(0);
 
   function handleInput(event) {
     setInput(event.target.value);
-    setClear(event.target.value);
+  }
+
+  function replaceInputWithMemorizedNumber() {
+    setInput(savedResult);
   }
 
   function handleSum() {
@@ -21,7 +23,6 @@ export default function App() {
   }
 
   function resetInputField() {
-    setClear(true);
     setResult(0);
     setInput(0);
   }
@@ -48,8 +49,7 @@ export default function App() {
   }
 
   function handleMemorization() {
-    setResult(inputRef.current.value);
-    console.log(inputRef.current.value);
+    setSavedResult(result)
   }
 
   return (
@@ -64,7 +64,6 @@ export default function App() {
                 className="form-control"
                 id="result-input"
                 value={result}
-                ref={inputRef}
                 onChange={handleInput}
               />
             </div>
@@ -73,7 +72,7 @@ export default function App() {
             <div className="form-group form-group-warning">
               <input
                 type="number"
-                value={clear}
+                value={input}
                 placeholder="Enter a number"
                 className="form-control"
                 id="number-input"
@@ -110,6 +109,15 @@ export default function App() {
                   className="btn btn-primary"
                 >
                   Memo
+                </button>
+              </div>
+              <div className="col-10 mt-2">
+                <button
+                  type="submit"
+                  onClick={replaceInputWithMemorizedNumber}
+                  className="btn btn-primary"
+                >
+                  use Memo
                 </button>
               </div>
             </div>
