@@ -5,13 +5,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 export default function App() {
   const [input, setInput] = useState("");
   const [result, setResult] = useState(0);
-  const [clear, setClear] = useState(false);
   const [rememberResult, setRememberResult] = useState(0);
-  const [showRememberedResult, setShowRememberedResult] = useState(0);
 
   function handleInput(event) {
     setInput(event.target.value);
-    setClear(event.target.value);
   }
 
   function handleSum() {
@@ -19,11 +16,12 @@ export default function App() {
     let secondNumber = Number(result);
     let sum = number + secondNumber;
     setResult(sum);
+    setInput("");
   }
 
   function resetInputField() {
-    setClear(true);
     setResult(0);
+    setInput(0);
   }
 
   function handleSubtr() {
@@ -31,6 +29,7 @@ export default function App() {
     let secondNumber = Number(result);
     let subtraction = secondNumber - number;
     setResult(subtraction);
+    setInput("");
   }
 
   function handleMult() {
@@ -38,6 +37,7 @@ export default function App() {
     let secondNumber = Number(result);
     let multiplication = number * secondNumber;
     setResult(multiplication);
+    setInput("");
   }
 
   function handleDivision() {
@@ -45,23 +45,22 @@ export default function App() {
     let secondNumber = Number(result);
     let division = secondNumber / number;
     setResult(division);
+    setInput("");
   }
 
   function handleMemorization() {
     setRememberResult(result);
-    console.log(result)
   }
 
-  function displayMemorised() {
-   setShowRememberedResult(rememberResult);
-   console.log(rememberResult)
+  function handleShowingMemorizedValue() {
+    setInput(rememberResult);
+    setResult("");
   }
 
   return (
     <div className="App">
       <div className="container">
         <h1>Form Calculator</h1>
-        <p>{showRememberedResult}</p>
         <div className="row">
           <div className="col-3">
             <div className="form-group form-group-warning">
@@ -78,9 +77,9 @@ export default function App() {
             <div className="form-group form-group-warning">
               <input
                 type="number"
-                value={clear}
                 placeholder="Enter a number"
                 className="form-control"
+                value={input}
                 id="number-input"
                 onChange={handleInput}
               />
@@ -97,7 +96,6 @@ export default function App() {
             >
               Clear
             </button>
-
             <div className="row">
               <div className="col-2 mt-2">
                 <button
@@ -127,7 +125,7 @@ export default function App() {
               <div className="col-10 mt-2">
                 <button
                   type="submit"
-                  onClick={displayMemorised}
+                  onClick={handleShowingMemorizedValue}
                   className="btn btn-primary"
                 >
                   DM
