@@ -8,27 +8,33 @@ export default function App() {
   const [operator, setOperator] = useState();
 
   function handleInput(event) {
-    let input = event.target.value;
+    const input = event.target.value;
     setNumber(number + input);
   }
 
   function handleOperations(event) {
-    let operatorInput = event.target.value;
+    const operatorInput = event.target.value;
     setOperator(operatorInput);
     setPreviousNum(number);
     setNumber("");
   }
 
-  function dealCulculation() {
+  function handleCalculation() {
+    let result = "";
     if (operator === "+") {
-      setNumber(Number(previousNum) + Number(number));
+      result = Number(previousNum) + Number(number);
+      console.log(setNumber)
     } else if (operator === "÷") {
-      setNumber(Number(previousNum) / Number(number));
+      result = Number(previousNum) / Number(number);
     } else if (operator === "*") {
-      setNumber(Number(previousNum) * Number(number));
+      result = Number(previousNum) * Number(number);
     } else if (operator === "-") {
-      setNumber(Number(previousNum) - Number(number));
+      result = Number(previousNum) - Number(number);
     }
+
+    setNumber(result.toString());
+    setPreviousNum("");
+    setOperator("")
   }
 
   function resetInputField() {
@@ -58,6 +64,7 @@ export default function App() {
                 type="text"
                 className="form-control"
                 value={number}
+                readOnly={true}
                 id="number-input"
               />
             </div>
@@ -241,7 +248,7 @@ export default function App() {
               <div className="col-2">
                 <button
                   type="button"
-                  onClick={dealCulculation}
+                  onClick={handleCalculation}
                   className="btn btn-primary"
                 >
                   =
